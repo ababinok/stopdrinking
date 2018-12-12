@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    tools:context=".activities.YesActivity">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/delete_text"
+        style="@style/GeneralText"
+        android:layout_height="match_parent"
+        android:layout_above="@id/howitworks_button"
+        android:text="@string/yes_text"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        app:autoSizeMaxTextSize="32sp"
+        app:autoSizeTextType="uniform" />
+
+    <Button
+        android:id="@+id/howitworks_button"
+        style="@style/Buttons"
+        android:layout_width="match_parent"
+        android:layout_above="@id/close_button"
+        android:text="@string/how_it_works"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/primary" />
+
+    <Button
+        android:id="@+id/close_button"
+        style="@style/Buttons"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:text="@string/close"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        android:textColor="@color/primary" />
+
+</RelativeLayout>
