@@ -11,10 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name="com.ofnicon.stopdrinking.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name="com.ofnicon.stopdrinking.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -22,18 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.ofnicon.stopdrinking.activities.NoActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.ofnicon.stopdrinking.activities.YesActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.ofnicon.stopdrinking.activities.HowItWorksActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.ofnicon.stopdrinking.activities.NotificationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name="com.ofnicon.stopdrinking.activities.NoActivity" />
+        <activity android:name="com.ofnicon.stopdrinking.activities.YesActivity" />
+        <activity android:name="com.ofnicon.stopdrinking.activities.HowItWorksActivity" />
+        <activity android:name="com.ofnicon.stopdrinking.activities.NotificationActivity" />
 
         <receiver
             android:name="com.ofnicon.stopdrinking.core.AlarmReceiver"
