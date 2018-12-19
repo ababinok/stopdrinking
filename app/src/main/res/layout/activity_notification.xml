@@ -13,7 +13,7 @@
         android:id="@+id/notification_tv"
         style="@style/GeneralText"
         android:layout_height="match_parent"
-        android:layout_above="@id/close_button"
+        android:layout_above="@id/share_button"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:autoSizeMaxTextSize="32sp"
@@ -21,11 +21,12 @@
         tools:text="Здесь будет текст уведомления" />
 
     <Button
-        android:id="@+id/close_button"
+        android:id="@+id/share_button"
         style="@style/Buttons"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
-        android:text="@string/close"
+        android:drawableEnd="@drawable/ic_share_24dp"
+        android:text="@string/share"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
         android:textColor="@color/primary" />
 

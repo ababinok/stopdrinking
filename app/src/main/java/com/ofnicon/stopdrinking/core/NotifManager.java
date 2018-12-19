@@ -59,4 +59,12 @@ public class NotifManager {
         setShowNotifications(context, true);
     }
 
+    public static void shareNotice(Context context, String text) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.setType("text/plain");
+        context.startActivity(Intent.createChooser(sendIntent,"Поделиться"));
+    }
+
 }
