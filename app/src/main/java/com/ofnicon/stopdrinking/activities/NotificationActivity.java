@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ofnicon.stopdrinking.R;
+import com.ofnicon.stopdrinking.core.NotifManager;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -16,13 +17,13 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
 
         Intent intent = getIntent();
-        String text = intent.getStringExtra("text");
+        final String text = intent.getStringExtra("text");
 
         ((TextView) findViewById(R.id.notification_tv)).setText(text);
-        findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.share_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                NotifManager.shareNotice(NotificationActivity.this, text);
             }
         });
 

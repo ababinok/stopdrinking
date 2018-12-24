@@ -40,6 +40,13 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationIntent.putExtra("text", text);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
 
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.setType("text/plain");
+        Intent chooser = Intent.createChooser(sendIntent,"Поделиться");
+        PendingIntent pendingSendIntent = PendingIntent.getActivity(context, 1, chooser, PendingIntent.FLAG_CANCEL_CURRENT);
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(context.getString(R.string.header_text))
@@ -49,6 +56,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)
                 .setContentIntent(pendingIntent)
+                .addAction(R.drawable.ic_share_24dp, context.getString(R.string.share), pendingSendIntent)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text));
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
