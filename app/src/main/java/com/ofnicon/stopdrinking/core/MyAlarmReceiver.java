@@ -13,7 +13,7 @@ import com.ofnicon.stopdrinking.activities.NotificationActivity;
 
 import java.util.Calendar;
 
-public class AlarmReceiver extends BroadcastReceiver {
+public class MyAlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -22,7 +22,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-        NotifManager.setNotificationAlarm(context, NotifManager.INTERVAL, false);
+//        NotifManager.setNotificationAlarm(context, NotifManager.INTERVAL, false);
 
         boolean first = intent.getBooleanExtra("first", false);
 
@@ -44,7 +44,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, text);
         sendIntent.setType("text/plain");
-        Intent chooser = Intent.createChooser(sendIntent,"Поделиться");
+        Intent chooser = Intent.createChooser(sendIntent, "Поделиться");
         PendingIntent pendingSendIntent = PendingIntent.getActivity(context, 1, chooser, PendingIntent.FLAG_CANCEL_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, MainActivity.CHANNEL_ID)

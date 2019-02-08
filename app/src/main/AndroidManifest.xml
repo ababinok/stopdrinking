@@ -27,7 +27,7 @@
         <activity android:name="com.ofnicon.stopdrinking.activities.NotificationActivity" />
 
         <receiver
-            android:name="com.ofnicon.stopdrinking.core.AlarmReceiver"
+            android:name="com.ofnicon.stopdrinking.core.MyAlarmReceiver"
             android:enabled="true" />
     </application>
 
