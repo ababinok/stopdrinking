@@ -13,8 +13,8 @@ import java.util.Random;
 
 public class NotifManager {
 
-//    static final long INTERVAL = 1000 * 60 * 60; // 1 час в продакшн
-    static final long INTERVAL = 60000; // 20 секунд для тестов
+    static final long INTERVAL = 1000 * 60 * 60; // 1 час в продакшн
+//    static final long INTERVAL = 60000; // 20 секунд для тестов
     private static final String APP_PREFERENCES = "StopDrinkingSettings";
     private static final String APP_PREFERENCES_SHOW_NOTIFICAIONS = "show_notifications";
 
