@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.yes_button:
                 NotifManager.enableNotifications(this);
-                NotifManager.setNotificationAlarm(this, 5000, true);
+                NotifManager.setNotificationAlarm(this);
                 finish();
                 startActivity(new Intent(this, YesActivity.class));
                 break;
