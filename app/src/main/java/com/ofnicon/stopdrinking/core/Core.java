@@ -22,10 +22,6 @@ import static com.ofnicon.stopdrinking.core.NotificationWorker.TAG;
 
 public class Core {
 
-    //    private static final long INTERVAL = 1000 * 60 * 60; // 1 час в продакшн
-    private static final long INTERVAL = 1000 * 60 * 10; // 10 минут для тестов
-    private static final long FIRST_DISPLAY_DELAY = 5000; // first show after turning on
-
     private static String getNotificationText(Context context) {
         String[] reasonsArray = context.getResources().getStringArray(R.array.reasons_list);
         Random r = new Random();
@@ -41,38 +37,15 @@ public class Core {
                 .build();
         WorkManager.getInstance().enqueue(oneTimeWorkRequest);
 
-        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class, 15, TimeUnit.MINUTES, 10, TimeUnit.MINUTES)
+        PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class, 60, TimeUnit.MINUTES, 55, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .build();
         WorkManager.getInstance().enqueue(periodicWorkRequest);
 
-//        long currentTimeInMillis = SystemClock.elapsedRealtime();
-//        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//
-//        // First "Welcome" notification
-//        alarmManager.set(
-//                android.app.AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                currentTimeInMillis + FIRST_DISPLAY_DELAY,
-//                getPendingIntent(context, 1));
-//
-//        // Repeating notifications
-//        alarmManager.setRepeating(
-//                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                currentTimeInMillis + INTERVAL,
-//                INTERVAL,
-//                getPendingIntent(context, 2));
-
-    }
-
-    private static PendingIntent getPendingIntent(Context context, int requestCode) {
-        Intent intent = new Intent(context, MyAlarmReceiver.class);
-        return PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
     public static void stopNotifications(Context context) {
         WorkManager.getInstance().cancelAllWorkByTag(TAG);
-//        android.app.AlarmManager alarmManager = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-//        alarmManager.cancel(getPendingIntent(context, 2));
     }
 
     public static void shareNotice(Context context, String text) {
@@ -110,7 +83,7 @@ public class Core {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text));
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(Calendar.getInstance().get(Calendar.MINUTE), builder.build());
+        notificationManagerCompat.notify(Calendar.getInstance().get(Calendar.HOUR_OF_DAY), builder.build());
     }
 
 }
