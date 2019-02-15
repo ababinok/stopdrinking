@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.ofnicon.stopdrinking.R;
-import com.ofnicon.stopdrinking.core.NotifManager;
+import com.ofnicon.stopdrinking.core.Core;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class NotificationActivity extends AppCompatActivity {
         findViewById(R.id.share_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotifManager.shareNotice(NotificationActivity.this, text);
+                Core.shareNotice(NotificationActivity.this, text);
             }
         });
 

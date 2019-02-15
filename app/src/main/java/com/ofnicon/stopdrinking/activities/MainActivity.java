@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.ofnicon.stopdrinking.R;
-import com.ofnicon.stopdrinking.core.NotifManager;
+import com.ofnicon.stopdrinking.core.Core;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -35,13 +35,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.yes_button:
-                NotifManager.enableNotifications(this);
-                NotifManager.setNotificationAlarm(this);
+                Core.startNotifications(this);
                 finish();
                 startActivity(new Intent(this, YesActivity.class));
                 break;
             case R.id.no_button:
-                NotifManager.disableNotifications(this);
+                Core.stopNotifications(this);
                 finish();
                 startActivity(new Intent(this, NoActivity.class));
                 break;

@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -15,15 +14,11 @@ import com.ofnicon.stopdrinking.activities.NotificationActivity;
 
 import java.util.Random;
 
-public class NotifManager {
+public class Core {
 
-//    private static final long INTERVAL = 1000 * 60 * 60; // 1 час в продакшн
-    private static final long INTERVAL = 600000; // 20 секунд для тестов
+    //    private static final long INTERVAL = 1000 * 60 * 60; // 1 час в продакшн
+    private static final long INTERVAL = 1000 * 60 * 10; // 10 минут для тестов
     private static final long FIRST_DISPLAY_DELAY = 5000; // first show after turning on
-
-
-    private static final String APP_PREFERENCES = "StopDrinkingSettings";
-    private static final String APP_PREFERENCES_SHOW_NOTIFICAIONS = "show_notifications";
 
     private static String getNotificationText(Context context) {
         String[] reasonsArray = context.getResources().getStringArray(R.array.reasons_list);
@@ -32,7 +27,7 @@ public class NotifManager {
         return reasonsArray[reasonNum];
     }
 
-    public static void setNotificationAlarm(Context context) {
+    public static void startNotifications(Context context) {
 
         long currentTimeInMillis = SystemClock.elapsedRealtime();
         android.app.AlarmManager alarmManager = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -57,31 +52,9 @@ public class NotifManager {
         return PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_CANCEL_CURRENT);
     }
 
-    static boolean notificationsEnabled(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        boolean result = false;
-        if (preferences.contains(APP_PREFERENCES_SHOW_NOTIFICAIONS)) {
-            result = preferences.getBoolean(APP_PREFERENCES_SHOW_NOTIFICAIONS, false);
-        }
-        return result;
-    }
-
-    private static void setShowNotifications(Context context, boolean value) {
-        SharedPreferences preferences = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(APP_PREFERENCES_SHOW_NOTIFICAIONS, value);
-        editor.apply();
-    }
-
-    public static void disableNotifications(Context context) {
-//        setShowNotifications(context, false);
-
+    public static void stopNotifications(Context context) {
         android.app.AlarmManager alarmManager = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(getPendingIntent(context, 2));
-    }
-
-    public static void enableNotifications(Context context) {
-        setShowNotifications(context, true);
     }
 
     public static void shareNotice(Context context, String text) {
@@ -94,7 +67,7 @@ public class NotifManager {
 
     static void displayNotification(Context context) {
 
-        String text = NotifManager.getNotificationText(context);
+        String text = Core.getNotificationText(context);
         Intent notificationIntent = new Intent(context, NotificationActivity.class);
         notificationIntent.putExtra("text", text);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 1, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);

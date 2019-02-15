@@ -11,15 +11,11 @@ public class MyAlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (!NotifManager.notificationsEnabled(context)) {
-            return;
-        }
-
         Calendar calendar = Calendar.getInstance();
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
 
         if (currentHour < 23 && currentHour >= 7) {
-            NotifManager.displayNotification(context);
+            Core.displayNotification(context);
         }
     }
 
