@@ -38,7 +38,7 @@ public class Core {
         WorkManager.getInstance().enqueue(oneTimeWorkRequest);
 
         PeriodicWorkRequest periodicWorkRequest = new PeriodicWorkRequest.Builder(NotificationWorker.class,
-                15, TimeUnit.MINUTES, 5, TimeUnit.MINUTES)
+                60, TimeUnit.MINUTES, 5, TimeUnit.MINUTES)
                 .addTag(TAG)
                 .build();
         WorkManager.getInstance().enqueue(periodicWorkRequest);
@@ -84,7 +84,7 @@ public class Core {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text));
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(Calendar.getInstance().get(Calendar.MINUTE), builder.build());
+        notificationManagerCompat.notify(Calendar.getInstance().get(Calendar.HOUR_OF_DAY), builder.build());
     }
 
 }
