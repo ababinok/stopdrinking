@@ -29,7 +29,7 @@ public class Core {
         return reasonsArray[reasonNum];
     }
 
-    public static void startNotifications(Context context) {
+    public static void startNotifications() {
 
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
                 .addTag(TAG)
@@ -45,7 +45,7 @@ public class Core {
 
     }
 
-    public static void stopNotifications(Context context) {
+    public static void stopNotifications() {
         WorkManager.getInstance().cancelAllWorkByTag(TAG);
     }
 
@@ -84,7 +84,7 @@ public class Core {
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(text));
 
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(Calendar.getInstance().get(Calendar.HOUR_OF_DAY), builder.build());
+        notificationManagerCompat.notify(1, builder.build());
     }
 
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.ofnicon.stopdrinking.R;
 import com.ofnicon.stopdrinking.core.Core;
@@ -35,14 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.yes_button:
-                Core.startNotifications(this);
+                Core.startNotifications();
                 finish();
                 startActivity(new Intent(this, YesActivity.class));
+                Toast.makeText(this, "Уведомления включены", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.no_button:
-                Core.stopNotifications(this);
+                Core.stopNotifications();
                 finish();
                 startActivity(new Intent(this, NoActivity.class));
+                Toast.makeText(this, "Уведомления выключены", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
