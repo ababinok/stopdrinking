@@ -19,8 +19,9 @@ public class NotificationWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+        boolean first = getInputData().getBoolean("first", false);
         int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        if (currentHour < 23 && currentHour >= 7) {
+        if (first || currentHour < 23 && currentHour >= 7) {
             Core.displayNotification(getApplicationContext());
         }
         return Worker.Result.success();

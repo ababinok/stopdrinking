@@ -10,10 +10,10 @@ import com.ofnicon.stopdrinking.R;
 import com.ofnicon.stopdrinking.activities.MainActivity;
 import com.ofnicon.stopdrinking.activities.NotificationActivity;
 
-import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
@@ -31,9 +31,13 @@ public class Core {
 
     public static void startNotifications() {
 
+        stopNotifications();
+
+        Data data = new Data.Builder().putBoolean("first", true).build();
         OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(NotificationWorker.class)
                 .addTag(TAG)
                 .setInitialDelay(5, TimeUnit.SECONDS)
+                .setInputData(data)
                 .build();
         WorkManager.getInstance().enqueue(oneTimeWorkRequest);
 
